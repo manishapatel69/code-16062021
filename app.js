@@ -28,7 +28,17 @@ app.listen(8080, function () {
  * @returns Object
  */
  function fetchBMIStatistics(bmiIndex)
-{
+ {
+      /**
+    BMI Range (kg/m2)
+    18.4 and below
+    18.5 - 24.9
+    25 - 29.9
+    30 - 34.9
+    35 - 39.9
+    40 and above
+    Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk ,Very high risk
+    */ 
     bmiStatsData = {range: "", category: "", risk: ""};
     if (bmiIndex <= 18.4){
         bmiStatsData.range = "18.4 and Below";
@@ -68,6 +78,10 @@ app.listen(8080, function () {
 
 function calculateBMIData(height, weight, isHeightCM = false)
 {
+    // Formula 1 - BMI
+    // 2 2 BMI(kg/m ) = mass(kg) / height(m)
+    //BMI Range = (kg/m2 ) 
+
     if(isHeightCM)
         height = height / 100;
     return (weight / (height * height)).toFixed(1);
@@ -98,12 +112,13 @@ function drawLineToResponseData(res)
 }
 
 // Sample Data Excecution
-/**
+ /**
  * Runs the BMI calculations on sample JSON data
  * @param {response} res 
  */
 function run(res)
 {
+   
     sampleJSONData = [
         {
             "Gender": "Male",
